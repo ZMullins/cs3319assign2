@@ -1,4 +1,4 @@
---delete if exists then create database
+-- delete if exists then create database
 SHOW DATABASES;
 DROP DATABASE IF EXISTS 250849298assign2db;
 CREATE DATABASE 250849298assign2db;
