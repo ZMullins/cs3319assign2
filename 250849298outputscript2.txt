@@ -1,0 +1,16 @@
+--------------
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productid	description	cost	quantity
+11	Bike	150.00	200
+12	Socks	2.00	100
+78	Knee Pads	12.15	70
+88	Roller Blades	75.00	89
+99	Helmet	29.00	30

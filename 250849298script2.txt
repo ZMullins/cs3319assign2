@@ -1,5 +1,5 @@
 USE 250849298assign2db;
-LOAD DATA INFILE 'loaddatafall2018.txt' INTO product
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product
 FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\r\n';
+LINES TERMINATED BY '\n';
 SELECT * FROM product;
