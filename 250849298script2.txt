@@ -3,3 +3,30 @@ LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE product
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n';
 SELECT * FROM product;
+INSERT INTO product VALUES ('66','Elbow pads',14.25,120),('20','Shoulder pads',30.20,200);
+INSERT INTO agent VALUES ('99','Hugh','Grant','Springfield',16),('22','Courtney','Cox','New York',25),('66','Rosie','ODonnell','Ottawa',100),('33','David','Letterman','Bedrock',100),('11','Regis','Philbin','Boston',33),('12','Rosie','Cox','Ottawa',50),('10','Zach','Mullins','Sarnia',100);
+INSERT INTO customer VALUES 
+('21', 'Homer', 'Simpson', 'Springfield', '686-8956','99')
+('31', 'Sideshow', 'Bob', 'Springfield', '686-5555','66')
+('12', 'Monty', 'Burns', 'Springfield', '789-0000','99')
+('15', 'Fred', 'Flintstone', 'Bedrock', '777-2345','11')
+('13', 'Super', 'Man', 'Kypto', '888-1234','33')
+('10', 'Barney', 'Rubble', 'Bedrock', '777-1234','11')
+('14', 'Peter Griffens', 'Providence', '987-4567','99');
+INSERT INTO purchases VALUES
+('21','99',20),('21','12',14),('21','66',10),('31','99',1),('31','12',2),('31','78',4),('31','66',2),('15','66',2),('15','78',2),('14','66',19);
+SELECT * FROM product;
+SELECT * FROM agent;
+SELECT * FROM customer;
+SELECT * FROM purchases;
+UPDATE customer SET firstname = 'Wonder', lastname = 'Woman' WHERE firstname = 'Super' AND lastname = 'Man';
+UPDATE purchases p 
+JOIN customer c ON p.customerid = c.customerid
+SET p.quantity = 5 WHERE c.firstname = 'Sideshow' AND c.lastname = 'Bob';
+UPDATE customer c
+JOIN agent a ON c.agentid = a.agentid
+SET c.city='Boston' WHERE a.firstname = 'Regis';
+SELECT * FROM product;
+SELECT * FROM agent;
+SELECT * FROM customer;
+SELECT * FROM purchases;
