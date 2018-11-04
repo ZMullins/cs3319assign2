@@ -3,18 +3,18 @@ SHOW DATABASES;
 DROP DATABASE IF EXISTS 250849298assign2db;
 CREATE DATABASE 250849298assign2db;
 USE 250849298assign2db;
---let TA access
+-- let TA access
 GRANT USAGE ON *.* TO 'ta'@'localhost';
 DROP USER 'ta'@'localhost';
 CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
 GRANT ALL PRIVILEGES ON 250849298assign2db.* TO 'ta'@'localhost';
 FLUSH PRIVILEGES;
 SHOW TABLES;
---create agent table
+-- create agent table
 CREATE TABLE agent(agentid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), commissionpercent DECIMAL(5,2), PRIMARY KEY(agentid));
---create customer table (customer requires an agent, so agentid is not null
+-- create customer table (customer requires an agent, so agentid is not null
 CREATE TABLE customer(customerid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), phonenumber VARCHAR(15), agentid VARCHAR(2) NOT NULL, PRIMARY KEY(customerid), CONSTRAINT dealswith FOREIGN KEY(agentid) REFERENCES agent(agentid));
---create product table
+-- create product table
 CREATE TABLE product(productid VARCHAR(2) NOT NULL, description VARCHAR(20), cost DECIMAL(10,2), quantity INT UNSIGNED, PRIMARY KEY(productid));
---create table with purchases
+-- create table with purchases
 CREATE TABLE purchases(customerid VARCHAR(2) NOT NULL, productid VARCHAR(2) NOT NULL, quantity INT UNSIGNED, PRIMARY KEY(customerid, productid),CONSTRAINT customerpurchase FOREIGN KEY(customerid) REFERENCES customer(customerid), CONSTRAINT productpurchase FOREIGN KEY(productid) REFERENCES product(productid));
