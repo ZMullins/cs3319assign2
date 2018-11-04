@@ -1,7 +1,144 @@
-ERROR 1064 (42000) at line 2: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Query 1
-SELECT description FROM product' at line 1
 --------------
---Query 1
 SELECT description FROM product
 --------------
 
+description
+Bike
+Socks
+Shoulder pads
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT(city) FROM customer
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agent ORDER BY city
+--------------
+
+agentid	firstname	lastname	city	commissionpercent
+33	David	Letterman	Bedrock	100.00
+11	Regis	Philbin	Boston	33.00
+22	Courtney	Cox	New York	25.00
+12	Rosie	Cox	Ottawa	50.00
+66	Rosie	ODonnell	Ottawa	100.00
+10	Zach	Mullins	Sarnia	100.00
+99	Hugh	Grant	Springfield	16.00
+--------------
+SELECT firstname,lastname FROM customer 
+WHERE city='Springfield'
+--------------
+
+firstname	lastname
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT c.lastname FROM customer c,agent a 
+WHERE c.agentid=a.agentid AND a.firstname = 'Regis'
+--------------
+
+lastname
+Rubble
+Flintstone
+--------------
+SELECT description FROM product 
+WHERE description LIKE '%pad%' 
+OR description LIKE '%Pad%'
+--------------
+
+description
+Shoulder pads
+Elbow pads
+Knee Pads
+--------------
+SELECT lastname, description, p.quantity 
+FROM customer c 
+INNER JOIN purchases p ON c.customerid=p.customerid 
+INNER JOIN product pr ON p.productid=pr.productid
+--------------
+
+lastname	description	quantity
+Griffens	Elbow pads	19
+Flintstone	Elbow pads	2
+Flintstone	Knee Pads	2
+Simpson	Socks	14
+Simpson	Elbow pads	10
+Simpson	Helmet	20
+Bob	Socks	5
+Bob	Elbow pads	5
+Bob	Knee Pads	5
+Bob	Helmet	5
+--------------
+SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM customer c, purchases p WHERE c.customerid = p.customerid AND firstname = 'Homer'
+--------------
+
+Homer's Total Purchases
+44
+--------------
+SELECT firstname, lastname, SUM(quantity) AS 'Total Purchases' FROM customer c INNER JOIN purchases p ON c.customerid=p.customerid GROUP BY c.customerid
+--------------
+
+firstname	lastname	Total Purchases
+Peter	Griffens	19
+Fred	Flintstone	4
+Homer	Simpson	44
+Sideshow	Bob	20
+--------------
+SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases)
+--------------
+
+description	quantity
+Bike	200
+Shoulder pads	200
+Roller Blades	89
+--------------
+SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases p, customer c WHERE p.customerid= c.customerid AND c.firstname='Fred' AND c.lastname='Flintstone' )
+--------------
+
+description	quantity
+Bike	200
+Socks	100
+Shoulder pads	200
+Roller Blades	89
+Helmet	30
+--------------
+SELECT a.firstname as 'Agent firstname',a.lastname as 'Agent lastname',c.firstname as 'Customer firstname',c.lastname as 'Customer lastname' FROM agent a INNER JOIN customer c ON a.agentid = c.agentid WHERE a.city=c.city
+--------------
+
+Agent firstname	Agent lastname	Customer firstname	Customer lastname
+Regis	Philbin	Barney	Rubble
+Regis	Philbin	Fred	Flintstone
+Hugh	Grant	Monty	Burns
+Hugh	Grant	Homer	Simpson
+--------------
+SELECT SUM(p.quantity) as 'Total Number of Knee Pads Purchased' FROM purchases p, product pr WHERE p.productid=pr.productid AND pr.description='Knee Pads'
+--------------
+
+Total Number of Knee Pads Purchased
+7
+--------------
+SELECT description AS 'Products Purchased by >3 Customers' FROM product pr INNER JOIN purchases p ON pr.productid = p.productid GROUP BY p.productid HAVING COUNT(p.customerid)>3
+--------------
+
+Products Purchased by >3 Customers
+Elbow pads
+--------------
+SELECT a.firstname,a.lastname FROM agent a
+INNER JOIN customer c ON a.agentid=c.agentid
+INNER JOIN purchases p ON c.customerid = p.customerid 
+INNER JOIN product pr ON p.productid = pr.productid
+WHERE pr.description = 'Knee Pads'
+GROUP BY a.firstname, a.lastname
+--------------
+
+firstname	lastname
+Regis	Philbin
+Rosie	ODonnell

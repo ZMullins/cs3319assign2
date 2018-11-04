@@ -30,11 +30,11 @@ UPDATE customer SET firstname = 'Wonder', lastname = 'Woman' WHERE firstname = '
 UPDATE purchases p 
 JOIN customer c ON p.customerid = c.customerid
 SET p.quantity = 5 WHERE c.firstname = 'Sideshow' AND c.lastname = 'Bob';
---change all of Regis' customers to be in Boston
+-- change all of Regis' customers to be in Boston
 UPDATE customer c
 JOIN agent a ON c.agentid = a.agentid
 SET c.city='Boston' WHERE a.firstname = 'Regis';
---show all tables
+-- show all tables
 SELECT * FROM product;
 SELECT * FROM agent;
 SELECT * FROM customer;

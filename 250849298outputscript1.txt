@@ -1,5 +1,3 @@
-ERROR 1064 (42000) at line 6: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--let TA access
-GRANT USAGE ON *.* TO 'ta'@'localhost'' at line 1
 --------------
 SHOW DATABASES
 --------------
@@ -20,7 +18,51 @@ CREATE DATABASE 250849298assign2db
 --------------
 
 --------------
---let TA access
 GRANT USAGE ON *.* TO 'ta'@'localhost'
 --------------
 
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON 250849298assign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE agent(agentid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), commissionpercent DECIMAL(5,2), PRIMARY KEY(agentid))
+--------------
+
+--------------
+CREATE TABLE customer(customerid VARCHAR(2) NOT NULL, firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), phonenumber VARCHAR(15), agentid VARCHAR(2) NOT NULL, PRIMARY KEY(customerid), CONSTRAINT dealswith FOREIGN KEY(agentid) REFERENCES agent(agentid))
+--------------
+
+--------------
+CREATE TABLE product(productid VARCHAR(2) NOT NULL, description VARCHAR(20), cost DECIMAL(10,2), quantity INT UNSIGNED, PRIMARY KEY(productid))
+--------------
+
+--------------
+CREATE TABLE purchases(customerid VARCHAR(2) NOT NULL, productid VARCHAR(2) NOT NULL, quantity INT UNSIGNED, PRIMARY KEY(customerid, productid),CONSTRAINT customerpurchase FOREIGN KEY(customerid) REFERENCES customer(customerid), CONSTRAINT productpurchase FOREIGN KEY(productid) REFERENCES product(productid))
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_250849298assign2db
+agent
+customer
+product
+purchases
