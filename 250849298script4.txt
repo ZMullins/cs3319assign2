@@ -1,21 +1,21 @@
 USE 250849298assign2db;
---Show current state of tables
+-- Show current state of tables
 SELECT * FROM product;
 SELECT * FROM agent;
 SELECT * FROM customer;
 SELECT * FROM purchases;
---Create view
+-- Create view
 CREATE VIEW `customerview` AS SELECT firstname, lastname, description, p.quantity, pr.cost, p.quantity*pr.cost as 'totalcost' FROM customer c
 INNER JOIN purchases p ON c.customerid = p.customerid
 INNER JOIN product pr ON p.productid = pr.productid
 ORDER BY lastname;
---show view
+-- show view
 SELECT * FROM customerview;
---show purchases >$100
+-- show purchases >$100
 SELECT * FROM customerview WHERE totalcost > 100;
---delete my product
+-- delete my product
 DELETE FROM product WHERE description = 'Shoulder pads';
---show my product is deleted
+-- show my product is deleted
 SELECT * FROM product WHERE description = 'Shoulder pads';
 DELETE FROM agent WHERE city = 'Springfield';
---These agents cannot be deleted as the customers table has references (foreign key) to their agentids, and when trying to delete all the agents in Springfield this includes agents with customers
+-- These agents cannot be deleted as the customers table has references (foreign key) to their agentids, and when trying to delete all the agents in Springfield this includes agents with customers

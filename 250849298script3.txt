@@ -1,40 +1,40 @@
 USE 250849298assign2db;
---Query 1
+-- Query 1
 SELECT description FROM product;
---Query 2
+-- Query 2
 SELECT DISTINCT(city) FROM customer;
---Query 3
+-- Query 3
 SELECT * FROM agent ORDER BY city;
---Query 4
+-- Query 4
 SELECT firstname,lastname FROM customer 
 WHERE city='Springfield';
---Query 5
+-- Query 5
 SELECT c.lastname FROM customer c,agent a 
 WHERE c.agentid=a.agentid AND a.firstname = 'Regis';
---Query 6
+-- Query 6
 SELECT description FROM product 
 WHERE description LIKE '%pad%' 
 OR description LIKE '%Pad%';
---Query 7
+-- Query 7
 SELECT lastname, description, p.quantity 
 FROM customer c 
 INNER JOIN purchases p ON c.customerid=p.customerid 
 INNER JOIN product pr ON p.productid=pr.productid;
---Query 8
+-- Query 8
 SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM customer c, purchases p WHERE c.customerid = p.customerid AND firstname = 'Homer';
---Query 9
+-- Query 9
 SELECT firstname, lastname, SUM(quantity) AS 'Total Purchases' FROM customer c INNER JOIN purchases p ON c.customerid=p.customerid GROUP BY c.customerid;
---Query 10
+-- Query 10
 SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases);
---Query 11
+-- Query 11
 SELECT description, quantity FROM product WHERE productid NOT IN (SELECT productid FROM purchases p, customer c WHERE p.customerid= c.customerid AND c.firstname='Fred' AND c.lastname='Flintstone' );
---Query 12
+-- Query 12
 SELECT a.firstname as 'Agent firstname',a.lastname as 'Agent lastname',c.firstname as 'Customer firstname',c.lastname as 'Customer lastname' FROM agent a INNER JOIN customer c ON a.agentid = c.agentid WHERE a.city=c.city;
---Query 13
+-- Query 13
 SELECT SUM(p.quantity) as 'Total Number of Knee Pads Purchased' FROM purchases p, product pr WHERE p.productid=pr.productid AND pr.description='Knee Pads';
---Query 14
+-- Query 14
 SELECT description AS 'Products Purchased by >3 Customers' FROM product pr INNER JOIN purchases p ON pr.productid = p.productid GROUP BY p.productid HAVING COUNT(p.customerid)>3;
---Query 15
+-- Query 15
 SELECT a.firstname,a.lastname FROM agent a
 INNER JOIN customer c ON a.agentid=c.agentid
 INNER JOIN purchases p ON c.customerid = p.customerid 
