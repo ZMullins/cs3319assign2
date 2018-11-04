@@ -1,0 +1,5 @@
+USE 250849298assign2db;
+LOAD DATA INFILE 'loaddatafall2018.txt' INTO product
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n';
+SELECT * FROM product;
