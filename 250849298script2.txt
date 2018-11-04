@@ -12,7 +12,7 @@ INSERT INTO customer VALUES
 ('15', 'Fred', 'Flintstone', 'Bedrock', '777-2345','11'),
 ('13', 'Super', 'Man', 'Kypto', '888-1234','33'),
 ('10', 'Barney', 'Rubble', 'Bedrock', '777-1234','11'),
-('14', 'Peter Griffens', 'Providence', '987-4567','99');
+('14', 'Peter', 'Griffens', 'Providence', '987-4567','99');
 INSERT INTO purchases VALUES
 ('21','99',20),('21','12',14),('21','66',10),('31','99',1),('31','12',2),('31','78',4),('31','66',2),('15','66',2),('15','78',2),('14','66',19);
 SELECT * FROM product;
